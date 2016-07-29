@@ -45,3 +45,27 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.suo
+BoatCounting.VC.db
+*.opendb
+ConsoleApplication1.VC.db
+*.filters
+ConsoleApplication1/ConsoleApplication1.vcxproj.user
+*.obj
+ConsoleApplication1/x64/Debug/basefunctions.obj.enc
+*.enc
+ConsoleApplication1/x64/Debug/boatCounting.pch
+*.tlog
+ConsoleApplication1/x64/Debug/ConsoleApplication1.log
+*.log
+ipch/CONSOLEAPPLICATION1-6a3d73d7/BOATCOUNTING-4cda1c91.ipch
+*.ipch
+*.exe
+x64/Release/ConsoleApplication1.iobj
+*.ipdb
+x64/Release/ConsoleApplication1.pdb
+*.pdb
+x64/Release/boatCounting.iobj
+*.ilk
+ConsoleApplication1/x64/Release/boatCounting.pch
+*.idb
