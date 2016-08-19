@@ -53,7 +53,7 @@ class BoatCountEngine: public baseFuncClass
     string mFilename;
 
 public:
-    vector<frame_detect*> frames;
+    vector<ObjectDetection*> frames;
     int waterline ;
     
     BoatCountEngine(int visual)

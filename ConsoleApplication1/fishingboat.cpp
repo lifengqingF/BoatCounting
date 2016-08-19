@@ -364,7 +364,7 @@ int BoatCountEngine::process(Mat & image)
     }
          current = new Mat;
         image.copyTo(*current);
-        frame_detect* detect_engine = new frame_detect(waterline,visualize);
+        ObjectDetection* detect_engine = new ObjectDetection(waterline,visualize);
     if (last !=NULL) {
         Mat image1gray;
         Mat image2gray;
@@ -372,7 +372,7 @@ int BoatCountEngine::process(Mat & image)
         cvtColor(*current, image2gray, CV_RGB2GRAY);
         detect_engine->setfilename(mPath, mFilename);
         detect_engine->detect_waterline(image1gray,image2gray); //find out waterline first  // find water line test
-        detect_engine->detect_objects_in_diff(image1gray, image2gray);
+        detect_engine->DetectObjects(image1gray, image2gray);
         frames.push_back(detect_engine);
         sort_addup_objects(image1gray);
               if (visualize) {
@@ -383,14 +383,13 @@ int BoatCountEngine::process(Mat & image)
             if(haveitems)
             {
                 
-               char ch = waitKey(30);
+               char ch = waitKey(1);
                 if(ch == ' ')
                     waitKey();
-            }
-                  
+            } 
             else
             {
-               // waitKey();
+                waitKey(1);
             }
         }
         else
@@ -412,8 +411,8 @@ int BoatCountEngine::sort_addup_objects(Mat& image)
 {
     int framecount = frames.size();
     if (framecount >=2) {
-        frame_detect* currentframe = frames[framecount-1];
-        frame_detect* lastframe = frames[framecount-2];
+        ObjectDetection* currentframe = frames[framecount-1];
+        ObjectDetection* lastframe = frames[framecount-2];
         vector<Object>* objects_last = &(lastframe->positive_objects);
         vector<Object>* objects_current = &(currentframe->positive_objects);
         vector<Object> objects_overlap;
@@ -465,7 +464,7 @@ vector<Object>::iterator  BoatCountEngine::checkthis( vector<Object>::iterator c
                 {
                     (*current_obj_itr).myid = boatcount++;
                 }
-                else if(getoverlaprate(*last_obj_itr, *current_obj_itr) >80 /*&&  (*current_obj_itr).type && (*current_obj_itr).addupaverage - (*current_obj_itr).average <BRIGHTNESSDIFF  &&  (*current_obj_itr).average - (*current_obj_itr). addupaverage < BRIGHTNESSDIFF*/)
+                else if(getoverlaprate(*last_obj_itr, *current_obj_itr) >40 /*&&  (*current_obj_itr).type && (*current_obj_itr).addupaverage - (*current_obj_itr).average <BRIGHTNESSDIFF  &&  (*current_obj_itr).average - (*current_obj_itr). addupaverage < BRIGHTNESSDIFF*/)
                 {
                     (*current_obj_itr).myid = boatcount++;
                 }

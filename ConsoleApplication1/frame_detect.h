@@ -21,7 +21,7 @@
 using namespace std;
 using namespace cv;
 
-class frame_detect: public baseFuncClass
+class ObjectDetection: public baseFuncClass
 {
 public:
  
@@ -52,13 +52,13 @@ public:
         return positive_objects.size() +  negtive_objects.size();
     };
     
-    frame_detect(int average_waterline,int visual)
+    ObjectDetection(int average_waterline,int visual)
     {
         waterline = average_waterline;
         average_brightness = 0;
         visualize = visual;
     };
-    ~frame_detect()
+    ~ObjectDetection()
     {
     }
     Rect  waterlineRect(Mat& image)
@@ -79,8 +79,9 @@ public:
     int erode(Mat & image , Mat& dst);
   //  int cropcontour(Mat& src_gray, Mat&dst);
     int cropcontour(Mat& src_img,Mat& src_gray, Mat&dst_poly, Mat&dst_hull, int pn);
-    int get_addup(Mat& a, Mat& b, Mat& addup);
-    int detect_objects_in_diff( Mat& image1, Mat& image2);
+    int DetectObjects( Mat& image1, Mat& image2);
+	int DetectObjects(Mat& image);
+
   
   
 
