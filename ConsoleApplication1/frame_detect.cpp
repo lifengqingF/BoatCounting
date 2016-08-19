@@ -246,7 +246,7 @@ int frame_detect::detect_objects_in_diff( Mat& image1, Mat& image2)
         imshow("addup_threshold", addup_threshold);
         imshow("crop_addup_contour_poly", crop_addup_contour_poly);
     }
- 
+#if 1
     Mat deduce_threshold;
     ::threshold(deduce, deduce_threshold, 30, 30, CV_THRESH_TOZERO); //
     Mat crop_deduce_contour_poly;
@@ -255,8 +255,9 @@ int frame_detect::detect_objects_in_diff( Mat& image1, Mat& image2)
     if (visualize) {
            imshow("crop_deduce_contour_poly", crop_deduce_contour_poly);
     }
+#endif
  
- //TODO   sort_objects(); //check if objects rectangle overlap with each other. // not a good implementation
+//TODO    sort_objects(); //check if objects rectangle overlap with each other. // not a good implementation
     return 0;
 
     

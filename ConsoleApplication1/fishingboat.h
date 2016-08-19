@@ -16,6 +16,7 @@
 #include "inputoutput.h"
 #include "basefunctions.h"
 #include "frame_detect.h"
+#include <vector>
 using namespace std;
 using namespace cv;
 std::string _strdate_alternative();
@@ -24,6 +25,10 @@ std::string _strdate_alternative();
 
 class BoatCountEngine: public baseFuncClass
 {
+
+	vector <Mat> input_sequence;
+	vector <Mat> output_info_sequence;
+
 	Mat D;
 	Mat K;
 	Mat A;
@@ -61,10 +66,13 @@ public:
         average_brightness = 0;
         visualize = visual;
     };
+	int calculate(vector<Mat> &intput, Mat&info);
+	int potential_objects_detection(Mat& last_info, Mat& add, Mat&sub, Mat& info);
+
     int setfilename(string path, string name);
     int process(Mat & image);
-    int sort_addup_objects();
-    vector<Object>::iterator checkthis( vector<Object>::iterator i, vector<Object>& objects_last, vector<Object>& objects_current, vector<Object>& objects_overlap);
+    int sort_addup_objects(Mat & image);
+    vector<Object>::iterator checkthis( vector<Object>::iterator i, vector<Object>& objects_last, vector<Object>& objects_current, vector<Object>& objects_overlap, Rect& rect);
     int print_statistics(string day);
 	int maintainBackground();
 	int findObjectCandidate(Mat& image);

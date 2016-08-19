@@ -61,8 +61,16 @@ int test_on_one_day_images(string dir_path)
 		string fileFullName = dir_path + "/"+ fileName;
 		//  cout<<"file name:"<<fileName<<endl;
 		currentimage = imread(fileFullName, 1);
+		Mat src_gray;
+		cvtColor(currentimage, src_gray, CV_BGR2GRAY);
 		boat_counting_engine.setfilename(dir_path, fileName);
-		if (currentimage.rows > 0)
+		Mat dst(currentimage.rows/3, currentimage.cols/3, src_gray.type());
+		resize(src_gray, dst, dst.size(), 0, 0, INTER_AREA);
+
+		Mat signed_dst;
+		dst.convertTo(signed_dst, CV_32SC1);
+
+		if (src_gray.rows > 0)
 		{
 			boat_counting_engine.process(currentimage);
 
